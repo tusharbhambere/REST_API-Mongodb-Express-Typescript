@@ -12,16 +12,19 @@ router.post("/homecreat",async(req:Request,res:Response)=>{
  const item= Home.set({title,description,photo});
  await item.save();
  return res.status(200).json({
-data:item,
+     item,
  });
 });
 
 router.get("/homeget",async(req:Request,res:Response)=>{
  try {
-    const item= await Home.find({});
-    return res.status(200).json({
-        item,
-    });
+    // const item= await Home.find({});
+    // return res.status(200).json({
+    //     item,
+    const item=await Home.find({});
+    const res=JSON.parse(item)
+    return res.status(200).send(res);
+    }
      
  } catch (error) {
      return res.status(500).json({
@@ -29,7 +32,7 @@ router.get("/homeget",async(req:Request,res:Response)=>{
      });
      
  }
- });
+);
 
 //image post get insta
 router.post("/addphoto",async(req:Request,res:Response)=>{
