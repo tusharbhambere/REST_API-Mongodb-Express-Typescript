@@ -26,6 +26,6 @@ app.use("/",router);
  
 
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT || 8080,()=>{
     console.log(`server is rocking at ${process.env.PORT}`)
 })
