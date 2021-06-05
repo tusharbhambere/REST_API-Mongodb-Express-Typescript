@@ -11,48 +11,46 @@ router.post("/homecreat",async(req:Request,res:Response)=>{
  const {title,description,photo}= req.body;
  const item= Home.set({title,description,photo});
  await item.save();
- return res.status(200).json({
+ return res.status(200).send(
      item,
- });
+ );
 });
 
 router.get("/homeget",async(req:Request,res:Response)=>{
  try {
-    // const item= await Home.find({});
-    // return res.status(200).json({
-    //     item,
-    const item=await Home.find({});
-    const res=JSON.parse(item)
-    return res.status(200).send(res);
-    }
+    const item= await Home.find({});
+    return res.status(200).send(
+        item
+    );
+   
      
  } catch (error) {
-     return res.status(500).json({
+     return res.status(500).send({
          error:error
      });
      
  }
-);
+ });
 
 //image post get insta
 router.post("/addphoto",async(req:Request,res:Response)=>{
     const {image}= req.body;
     const item= photoInsta.set({image});
     await item.save();
-    return res.status(200).json({
+    return res.status(200).send(
    item,
-    });
+    );
    });
    
    router.get("/getphoto",async(req:Request,res:Response)=>{
     try {
        const item= await photoInsta.find({});
-       return res.status(200).json({
+       return res.status(200).send(
            item,
-       });
+       );
         
     } catch (error) {
-        return res.status(500).json({
+        return res.status(500).send({
             error:error
         });
         
@@ -64,17 +62,17 @@ router.post("/addmeme",async(req:Request,res:Response)=>{
     const {memephoto}= req.body;
     const item= memePhoto.set({memephoto});
     await item.save();
-    return res.status(200).json({
+    return res.status(200).json(
    item,
-    });
+    );
    });
    
    router.get("/getmeme",async(req:Request,res:Response)=>{
     try {
        const item= await memePhoto.find({});
-       return res.status(200).json({
+       return res.status(200).send(
            item,
-       });
+       );
         
     } catch (error) {
         return res.status(500).json({
